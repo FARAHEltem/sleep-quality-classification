@@ -127,7 +127,12 @@ sleep-quality-classification/
 
 ## 🚀 Utilisation
 
-Ouvrez un notebook sur GitHub et cliquez sur le badge **« Open in Colab »**. Envoyez le fichier CSV dans l'espace de fichiers de Colab, puis exécutez les cellules dans l'ordre.
+Ouvrez les notebooks directement dans Google Colab :
+
+- Analyse exploratoire : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FARAHEltem/sleep-quality-classification/blob/main/Analyse_du_dataset_sommeil.ipynb)
+- Classification : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FARAHEltem/sleep-quality-classification/blob/main/Classification_de_la_qualit%C3%A9_du_sommeil.ipynb)
+
+Envoyez ensuite le fichier CSV dans l'espace de fichiers de Colab, puis exécutez les cellules dans l'ordre.
 
 ## 👤 Auteur
 
