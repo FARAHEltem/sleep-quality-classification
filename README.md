@@ -119,9 +119,9 @@ Les performances très élevées (AUC proche de 1) s'expliquent en partie par la
 sleep-quality-classification/
 ├── Analyse_du_dataset_sommeil.ipynb                 # Analyse exploratoire (Python)
 ├── Classification_de_la_qualité_du_sommeil.ipynb    # Régression logistique (Python)
+├── comparaison_modeles_sommeil.ipynb                # Comparaison LR / Random Forest / SVM (Python)
 ├── Sleep_health_and_lifestyle_dataset.csv           # Jeu de données
-├── rapport/
-│   └── Rapport_regression_logistique_sommeil.pdf    # Rapport complet (analyse sous R)
+├── Rapport_regression_logistique_sommeil.pdf        # Rapport complet (analyse sous R)
 └── README.md
 ```
 
@@ -129,11 +129,12 @@ sleep-quality-classification/
 
 Ouvrez les notebooks directement dans Google Colab :
 
-- Analyse exploratoire : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FARAHEltem/sleep-quality-classification/blob/main/Analyse_du_dataset_sommeil.ipynb)
-- Classification : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/FARAHEltem/sleep-quality-classification/blob/main/Classification_de_la_qualit%C3%A9_du_sommeil.ipynb)
+- Analyse exploratoire : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/farahe-elmontaser/sleep-quality-classification/blob/main/Analyse_du_dataset_sommeil.ipynb)
+- Classification : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/farahe-elmontaser/sleep-quality-classification/blob/main/Classification_de_la_qualit%C3%A9_du_sommeil.ipynb)
+- Comparaison des modèles : [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/farahe-elmontaser/sleep-quality-classification/blob/main/comparaison_modeles_sommeil.ipynb)
 
 Envoyez ensuite le fichier CSV dans l'espace de fichiers de Colab, puis exécutez les cellules dans l'ordre.
 
-## 👤 Auteur
+## 👤 Auteure
 
-**Farahe El-Montaser** – [LinkedIn](https://www.linkedin.com/in/farahe-el-montaser-30a422368) · [GitHub](https://github.com/FARAHEltem)
+**Farahe El-Montaser** – [LinkedIn](https://www.linkedin.com/in/farahe-el-montaser-30a422368) · [GitHub](https://github.com/farahe-elmontaser)
