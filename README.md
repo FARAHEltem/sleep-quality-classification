@@ -4,7 +4,7 @@ Projet de **statistique et de Machine Learning** qui identifie les facteurs infl
 
 Projet réalisé dans le cadre du **Master Web Intelligence and Data Science**, module *Statistiques Exploratoires Multidimensionnelles* (encadré par Pr. AbdElkamel ALAJ, 2024-2025).
 
-📄 **[Lire le rapport complet (PDF)](rapport/Rapport_regression_logistique_sommeil.pdf)**
+📄 **[Lire le rapport complet (PDF)](Rapport_regression_logistique_sommeil.pdf)**
 
 ---
 
