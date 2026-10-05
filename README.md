@@ -1,32 +1,34 @@
 # 😴 Classification de la qualité du sommeil
 
-Projet de **Machine Learning** qui prédit la **qualité du sommeil** d'une personne à partir de son mode de vie et de ses indicateurs de santé (durée de sommeil, stress, activité physique, IMC, fréquence cardiaque…).
+Projet de **statistique et de Machine Learning** qui identifie les facteurs influençant la **qualité du sommeil** et prédit si une personne a une **bonne ou une mauvaise qualité de sommeil** à partir de son mode de vie et de ses indicateurs de santé.
 
-Le projet couvre tout le cycle d'un projet de Data Science : **exploration des données, nettoyage, préparation, entraînement de modèles et évaluation**.
+Projet réalisé dans le cadre du **Master Web Intelligence and Data Science**, module *Statistiques Exploratoires Multidimensionnelles* (encadré par Pr. AbdElkamel ALAJ, 2024-2025).
+
+📄 **[Lire le rapport complet (PDF)](rapport/Rapport_regression_logistique_sommeil.pdf)**
 
 ---
 
-## 🎯 Objectif
+## 🎯 Problématique
 
-Le sommeil a un impact direct sur la santé et la productivité. L'objectif est de :
+> Dans quelle mesure les habitudes de sommeil et le mode de vie influencent-ils la qualité du sommeil ?
 
-- **comprendre** quels facteurs du mode de vie influencent la qualité du sommeil ;
-- **construire un modèle** capable de prédire la qualité du sommeil d'une personne à partir de ces facteurs.
+- Quels sont les facteurs les plus déterminants pour un sommeil de qualité ?
+- Comment le stress, l'activité physique ou l'IMC affectent-ils le sommeil ?
+- Peut-on quantifier et hiérarchiser l'impact de chaque facteur ?
 
 ## 📊 Données
 
-**Source :** [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/) sur Kaggle *(remplacez ce lien par l'adresse exacte de la page Kaggle)*
+**Source :** [Sleep Health and Lifestyle Dataset](https://www.kaggle.com/datasets/uom190346a/sleep-health-and-lifestyle-dataset) (Kaggle, Laksika Tharmalingam, licence CC0)
 
-Le jeu de données contient **374 personnes** et **13 colonnes** :
+- **374 participants** âgés de 27 à 59 ans, **13 variables**
+- Aucune valeur manquante, aucune valeur aberrante problématique
+- Données **synthétiques**, construites à des fins pédagogiques et de recherche
 
 | Colonne | Description |
 |---|---|
-| `Person ID` | Identifiant de la personne |
-| `Gender` | Genre |
-| `Age` | Âge (années) |
-| `Occupation` | Profession |
+| `Gender`, `Age`, `Occupation` | Caractéristiques démographiques |
 | `Sleep Duration` | Durée de sommeil (heures par jour) |
-| `Quality of Sleep` | **Qualité du sommeil, note de 1 à 10 (variable cible)** |
+| `Quality of Sleep` | Qualité du sommeil, note de 1 à 10 |
 | `Physical Activity Level` | Activité physique (minutes par jour) |
 | `Stress Level` | Niveau de stress (1 à 10) |
 | `BMI Category` | Catégorie d'IMC |
@@ -35,82 +37,97 @@ Le jeu de données contient **374 personnes** et **13 colonnes** :
 | `Daily Steps` | Nombre de pas par jour |
 | `Sleep Disorder` | Trouble du sommeil (aucun, insomnie, apnée du sommeil) |
 
+**Variable cible :** la qualité du sommeil a été **binarisée** :
+
+| Classe | Règle | Effectif |
+|---|---|---|
+| **Good** | note ≥ 7 | 255 (68,2 %) |
+| **Bad** | note < 7 | 119 (31,8 %) |
+
 ## 🔍 Démarche
 
-### 1. Analyse exploratoire (`Analyse_du_dataset_sommeil.ipynb`)
+### 1. Analyse exploratoire
 
-- Distribution de l'âge des participants
-- Répartition de la qualité du sommeil
-- Relations entre la qualité du sommeil et les autres variables (stress, durée de sommeil, activité physique…)
+- Distributions des variables numériques et catégorielles, détection des valeurs aberrantes (boxplots)
+- Matrice de corrélation : **Stress Level (r = −0,90)** et **Sleep Duration (r = 0,88)** sont très fortement liés à la qualité du sommeil
+- Contrôle de la multicolinéarité avec le **VIF** (toutes les valeurs < 5)
+- Analyse bivariée : qualité du sommeil selon l'IMC, le trouble du sommeil, le stress…
 
-### 2. Nettoyage et préparation des données
+### 2. Modélisation
 
-- Vérification des valeurs manquantes et des doublons
-- Harmonisation des catégories d'IMC
-- Séparation de la tension artérielle en deux variables numériques (systolique et diastolique)
-- Encodage des variables catégorielles (genre, profession, IMC, trouble du sommeil)
-- Mise à l'échelle des variables numériques
-- Découpage en ensembles d'entraînement et de test
+- Création de la variable cible binaire (Good / Bad)
+- Découpage **stratifié 80 / 20** (entraînement / test)
+- **Régression logistique** (estimation par maximum de vraisemblance), interprétation des coefficients et des odds ratios
+- Comparaison avec **Random Forest** et **SVM** (noyau radial)
+- Évaluation : accuracy, sensibilité, spécificité, précision, F1-score, **courbe ROC et AUC**
 
-### 3. Modélisation et évaluation (`Classification_de_la_qualité_du_sommeil.ipynb`)
+## 📈 Résultats
 
-Plusieurs modèles de classification ont été entraînés et comparés :
+### Notebook Python : régression logistique
 
-| Modèle | Accuracy | F1-score |
+| Métrique | Résultat |
+|---|---|
+| Accuracy | **93,75 %** |
+| Sensibilité (rappel) | 94,79 % |
+| Spécificité | 91,43 % |
+| Précision | 96,05 % |
+| F1-score | **95,42 %** |
+| AUC | **0,982** |
+| Pseudo R² de McFadden | 0,846 |
+
+### Rapport R : comparaison de trois modèles (ensemble de test, n = 74)
+
+| Modèle | Accuracy | AUC | Temps |
+|---|---|---|---|
+| Régression logistique | 98,65 % | 1,000 | 21 ms |
+| Random Forest (500 arbres) | 98,65 % | 1,000 | 101 ms |
+| SVM (noyau radial) | 98,65 % | 1,000 | 20 ms |
+
+Les trois modèles ne font **qu'une seule erreur sur 74** prédictions. La **régression logistique** est retenue comme modèle final pour son **interprétabilité** (coefficients et odds ratios), ses tests de significativité et sa rapidité.
+
+### Facteurs les plus importants (Random Forest, Mean Decrease Gini)
+
+| Rang | Variable | Importance |
 |---|---|---|
-| *Modèle 1 (ex. Régression logistique)* | … | … |
-| *Modèle 2 (ex. Random Forest)* | … | … |
-| *Modèle 3 (ex. …)* | … | … |
+| 1 | **Stress Level** | 50,67 |
+| 2 | **Sleep Duration** | 38,54 |
+| 3 | **Heart Rate** | 21,42 |
+| 4 | Age | 6,09 |
+| 5 | Daily Steps | 4,77 |
 
-**Meilleur modèle :** *à compléter*
+Ces résultats convergent avec la régression logistique, où le stress, la durée de sommeil, la fréquence cardiaque, l'activité physique et les troubles du sommeil sont statistiquement significatifs.
 
 ## 💡 Principaux enseignements
 
-*À compléter avec vos observations, par exemple :*
+- **Le stress est le facteur dominant** : plus il est élevé, plus la qualité du sommeil se dégrade.
+- **La durée de sommeil** est le deuxième facteur majeur (7,5 h en moyenne pour un bon sommeil, contre 6,3 h pour un mauvais).
+- **Stress, durée de sommeil et fréquence cardiaque** représentent à eux seuls près de **87 %** de l'importance prédictive.
+- Les personnes **obèses** ont environ 50 % de mauvaise qualité de sommeil, contre 20 % pour un poids normal.
 
-- *Le niveau de stress est fortement lié à une mauvaise qualité de sommeil.*
-- *La durée de sommeil est l'un des facteurs les plus déterminants.*
-- *…*
+## ⚠️ Limites
+
+Les performances très élevées (AUC proche de 1) s'expliquent en partie par la **nature synthétique** des données, qui présentent des relations très régulières, et par la **petite taille** de l'ensemble de test. Sur des données cliniques réelles, les performances seraient vraisemblablement plus modestes. La **hiérarchie des facteurs** reste toutefois cohérente avec la littérature scientifique.
 
 ## 🛠️ Technologies
 
-- **Python**
-- **Pandas**, **NumPy** : manipulation des données
-- **Matplotlib**, **Seaborn** : visualisation
-- **Scikit-learn** : préparation des données, modèles et évaluation
-- **Google Colab** : environnement de travail
+- **Python** (Google Colab) : Pandas, Matplotlib, Seaborn
+- **R** (RStudio) : tidyverse, caret, car, pROC, randomForest, e1071, MASS, corrplot, ggplot2
 
 ## 📁 Structure du projet
 
 ```
 sleep-quality-classification/
-├── Analyse_du_dataset_sommeil.ipynb               # Analyse exploratoire
-├── Classification_de_la_qualité_du_sommeil.ipynb  # Préparation, modèles et évaluation
-├── Sleep_health_and_lifestyle_dataset.csv         # Jeu de données
+├── Analyse_du_dataset_sommeil.ipynb                 # Analyse exploratoire (Python)
+├── Classification_de_la_qualité_du_sommeil.ipynb    # Régression logistique (Python)
+├── Sleep_health_and_lifestyle_dataset.csv           # Jeu de données
+├── rapport/
+│   └── Rapport_regression_logistique_sommeil.pdf    # Rapport complet (analyse sous R)
 └── README.md
 ```
 
 ## 🚀 Utilisation
 
-**Dans Google Colab (le plus simple) :** ouvrez un notebook sur GitHub et cliquez sur le badge **« Open in Colab »** en haut du fichier. Envoyez le fichier CSV dans l'espace de fichiers de Colab, puis exécutez les cellules dans l'ordre.
-
-**En local :**
-
-```bash
-git clone https://github.com/FARAHEltem/sleep-quality-classification.git
-cd sleep-quality-classification
-pip install pandas numpy matplotlib seaborn scikit-learn jupyter
-jupyter notebook
-```
-
-Dans les notebooks, adaptez le chemin du fichier CSV (`/content/...` dans Colab) en `Sleep_health_and_lifestyle_dataset.csv`.
-
-## 🔭 Améliorations possibles
-
-- Optimisation des hyperparamètres (GridSearchCV)
-- Validation croisée pour des résultats plus robustes
-- Analyse de l'importance des variables
-- Déploiement du modèle dans une petite application (Streamlit ou API FastAPI)
+Ouvrez un notebook sur GitHub et cliquez sur le badge **« Open in Colab »**. Envoyez le fichier CSV dans l'espace de fichiers de Colab, puis exécutez les cellules dans l'ordre.
 
 ## 👤 Auteur
 
