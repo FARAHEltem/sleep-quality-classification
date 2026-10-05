@@ -2,7 +2,7 @@
 
 Projet de **statistique et de Machine Learning** qui identifie les facteurs influençant la **qualité du sommeil** et prédit si une personne a une **bonne ou une mauvaise qualité de sommeil** à partir de son mode de vie et de ses indicateurs de santé.
 
-Projet réalisé dans le cadre du **Master Web Intelligence and Data Science**, module *Statistiques Exploratoires Multidimensionnelles* (encadré par Pr. AbdElkamel ALAJ, 2024-2025).
+Projet réalisé dans le cadre du **Master Web Intelligence and Data Science**, module *Statistiques Exploratoires Multidimensionnelles* (encadré par Pr. AbdElkamel ALAJ, 2025-2026).
 
 📄 **[Lire le rapport complet (PDF)](Rapport_regression_logistique_sommeil.pdf)**
 
