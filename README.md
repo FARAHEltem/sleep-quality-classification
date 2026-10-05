@@ -131,4 +131,4 @@ Ouvrez un notebook sur GitHub et cliquez sur le badge **« Open in Colab »**. E
 
 ## 👤 Auteur
 
-**Farahe El-Montaser** – [GitHub](https://github.com/FARAHEltem) · [LinkedIn](https://www.linkedin.com/in/votre-profil)
+**Farahe El-Montaser** – [LinkedIn](https://www.linkedin.com/in/farahe-el-montaser-30a422368) · [GitHub](https://github.com/FARAHEltem)
